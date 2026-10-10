@@ -14,29 +14,29 @@
 ---
 
 ## 📌 Overview
-An enterprise-grade **Employee Leave Management System** built using **Spring Boot 3**[cite: 31, 38, 39]. This application handles the complete lifecycle of employee leave requests, featuring secure stateless **JWT authentication**, **Role-Based Access Control (RBAC)**, robust concurrency handling via **Optimistic Locking**, and a built-in lightweight Single-Page Web UI[cite: 31, 33, 34, 38].
+An enterprise-grade **Employee Leave Management System** built using **Spring Boot 3**. This application handles the complete lifecycle of employee leave requests, featuring secure stateless **JWT authentication**, **Role-Based Access Control (RBAC)**, robust concurrency handling via **Optimistic Locking**, and a built-in lightweight Single-Page Web UI.
 
 ---
 
 ## 🚀 Key Features & Architectural Highlights
-- **Clean Layered Architecture:** Strictly decoupled into Controller $\rightarrow$ Service $\rightarrow$ Repository $\rightarrow$ Hibernate/JPA[cite: 38].
-- **Stateless JWT Security:** Secure token-based authentication using `jjwt 0.12.6`, complete with custom `OncePerRequestFilter` and custom JSON security error handlers (401/403)[cite: 39, 42].
-- **Concurrency Protection:** Uses `@Version` (Optimistic Locking) on the `Employee` entity to prevent race conditions and double-deductions during simultaneous manager approvals[cite: 33, 34].
+- **Clean Layered Architecture:** Strictly decoupled into Controller $\rightarrow$ Service $\rightarrow$ Repository $\rightarrow$ Hibernate/JPA.
+- **Stateless JWT Security:** Secure token-based authentication using `jjwt 0.12.6`, complete with custom `OncePerRequestFilter` and custom JSON security error handlers (401/403).
+- **Concurrency Protection:** Uses `@Version` (Optimistic Locking) on the `Employee` entity to prevent race conditions and double-deductions during simultaneous manager approvals.
 - **Custom Business Rule Validations:** 
-  - Overlap check via JPQL interval math to prevent booking duplicate dates[cite: 34, 41].
-  - Server-calculated inclusive days (`numberOfDays`) to prevent client tampering[cite: 33, 40].
-  - Automatic balance re-verification during approval time[cite: 34].
-- **Built-in Web UI:** A zero-build, responsive single-page dashboard (`index.html`) served directly by Spring Boot supporting live auto-refreshing polling every 10 seconds[cite: 34, 44].
-- **Comprehensive Testing:** 28 robust unit tests covering service business logic, JWT issuance/validation, custom date validation, and authentication rules using JUnit 5 and Mockito[cite: 31, 35, 45].
+  - Overlap check via JPQL interval math to prevent booking duplicate dates.
+  - Server-calculated inclusive days (`numberOfDays`) to prevent client tampering.
+  - Automatic balance re-verification during approval time.
+- **Built-in Web UI:** A zero-build, responsive single-page dashboard (`index.html`) served directly by Spring Boot supporting live auto-refreshing polling every 10 seconds.
+- **Comprehensive Testing:** 28 robust unit tests covering service business logic, JWT issuance/validation, custom date validation, and authentication rules using JUnit 5 and Mockito.
 
 ---
 
 ## 🛠️ Tech Stack
 * **Language:** Java 17+ (Tested on Java 25 via compatibility flags)
-* **Framework:** Spring Boot 3.3.5 (Spring Web, Spring Data JPA, Spring Security)[cite: 38, 39]
-* **Database:** MySQL 8 (Production/Docker) & H2 File-Mode Profile (Zero-setup local development)[cite: 31, 39]
-* **Validation & Security:** Jakarta Bean Validation, BCrypt Password Hashing, JJWT[cite: 39]
-* **Testing & Tools:** JUnit 5, Mockito, AssertJ, Maven, Postman, VS Code REST Client (`.http`)[cite: 39, 45]
+* **Framework:** Spring Boot 3.3.5 (Spring Web, Spring Data JPA, Spring Security).
+* **Database:** MySQL 8 (Production/Docker) & H2 File-Mode Profile (Zero-setup local development)
+* **Validation & Security:** Jakarta Bean Validation, BCrypt Password Hashing, JJWT
+* **Testing & Tools:** JUnit 5, Mockito, AssertJ, Maven, Postman, VS Code REST Client (`.http`)
 
 ---
 
