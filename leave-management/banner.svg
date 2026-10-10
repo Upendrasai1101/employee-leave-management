@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="240" viewBox="0 0 900 240" role="img" aria-label="Employee Leave Management System banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6a11cb">
+        <animate attributeName="stop-color" values="#6a11cb;#2575fc;#00c9a7;#6a11cb" dur="10s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#2575fc">
+        <animate attributeName="stop-color" values="#2575fc;#00c9a7;#6a11cb;#2575fc" dur="10s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="typing">
+      <rect x="0" y="130" height="40" width="0">
+        <animate attributeName="width" values="0;900;900;0" keyTimes="0;0.45;0.9;1" dur="8s" repeatCount="indefinite"/>
+      </rect>
+    </clipPath>
+  </defs>
+
+  <rect width="900" height="240" rx="18" fill="url(#bg)"/>
+
+  <!-- floating circles -->
+  <circle cx="90" cy="60" r="34" fill="#fff" opacity="0.10">
+    <animate attributeName="cy" values="60;90;60" dur="6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="810" cy="180" r="48" fill="#fff" opacity="0.10">
+    <animate attributeName="cy" values="180;150;180" dur="7s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="700" cy="45" r="20" fill="#fff" opacity="0.12">
+    <animate attributeName="cx" values="700;740;700" dur="5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- title -->
+  <text x="450" y="95" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#fff">
+    Employee Leave Management
+    <animate attributeName="opacity" values="0;1" dur="1.2s" fill="freeze"/>
+  </text>
+
+  <!-- typing subtitle -->
+  <g clip-path="url(#typing)">
+    <text x="450" y="158" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="22" fill="#fff">
+      Spring Boot 3 · JWT Security · Role-based Approvals
+    </text>
+  </g>
+
+  <!-- shine sweep -->
+  <rect x="-200" y="0" width="200" height="240" fill="url(#shine)" transform="skewX(-20)">
+    <animate attributeName="x" values="-300;1100" dur="5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- status chips -->
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600">
+    <rect x="262" y="190" width="110" height="28" rx="14" fill="#ffffff" opacity="0.22"/>
+    <text x="317" y="209" text-anchor="middle" fill="#fff">PENDING</text>
+    <rect x="395" y="190" width="110" height="28" rx="14" fill="#22c55e" opacity="0.85"/>
+    <text x="450" y="209" text-anchor="middle" fill="#fff">APPROVED</text>
+    <rect x="528" y="190" width="110" height="28" rx="14" fill="#ef4444" opacity="0.85"/>
+    <text x="583" y="209" text-anchor="middle" fill="#fff">REJECTED</text>
+  </g>
+</svg>
