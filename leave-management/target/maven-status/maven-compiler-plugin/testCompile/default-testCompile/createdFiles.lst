@@ -1,4 +1,0 @@
-com\example\leave\security\JwtServiceTest.class
-com\example\leave\service\AuthServiceTest.class
-com\example\leave\service\LeaveServiceTest.class
-com\example\leave\validation\LeaveApplyRequestValidationTest.class
