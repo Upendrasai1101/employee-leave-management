@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/banner.svg" alt="Employee Leave Management System" width="100%"/>
+<img src="banner.svg" alt="Employee Leave Management System" width="100%"/>
 
 <br/>
 
