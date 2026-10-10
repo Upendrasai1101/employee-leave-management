@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: leave-management
+
+  # --- Database (externalized: override with environment variables) ---
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/leave_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
+
+  jpa:
+    hibernate:
+      # "update" is convenient for dev; use "validate" + Flyway/Liquibase in production
+      ddl-auto: ${DDL_AUTO:update}
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: ${SERVER_PORT:8080}
+
+# --- JWT ---
+app:
+  jwt:
+    # MUST be overridden in real deployments (min 32 characters)
+    secret: ${JWT_SECRET:change-this-secret-key-to-a-long-random-value-1234567890}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000} # 24 hours
+
+  # --- Default manager seeded on first startup (so there is someone who can approve leaves) ---
+  seed:
+    manager:
+      enabled: ${SEED_MANAGER_ENABLED:true}
+      name: ${SEED_MANAGER_NAME:Default Manager}
+      email: ${SEED_MANAGER_EMAIL:manager@company.com}
+      password: ${SEED_MANAGER_PASSWORD:Manager@123}
+      department: ${SEED_MANAGER_DEPARTMENT:Engineering}
+
+logging:
+  level:
+    com.example.leave: INFO

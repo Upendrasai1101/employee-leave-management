@@ -1,0 +1,124 @@
+### Leave Management API - REST Client file
+### Works with the VS Code "REST Client" extension (and IntelliJ HTTP Client for the plain requests).
+### Run the requests top to bottom. The default manager is seeded on first startup:
+###   manager@company.com / Manager@123
+
+@baseUrl = http://localhost:8080
+
+############################################################
+# AUTH
+############################################################
+
+### Register an employee (role is always EMPLOYEE). managerId = id of an existing MANAGER (seeded manager is usually 1)
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Asha",
+  "email": "asha@company.com",
+  "password": "Secret@123",
+  "department": "Engineering",
+  "managerId": 1
+}
+
+### Login as employee
+# @name loginEmployee
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "asha@company.com",
+  "password": "Secret@123"
+}
+
+### Login as manager
+# @name loginManager
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "manager@company.com",
+  "password": "Manager@123"
+}
+
+@employeeToken = {{loginEmployee.response.body.$.token}}
+@managerToken = {{loginManager.response.body.$.token}}
+
+############################################################
+# EMPLOYEE
+############################################################
+
+### Apply for leave (change the dates to future dates)
+# @name applyLeave
+POST {{baseUrl}}/api/leaves
+Authorization: Bearer {{employeeToken}}
+Content-Type: application/json
+
+{
+  "leaveType": "CASUAL",
+  "startDate": "2027-01-12",
+  "endDate": "2027-01-14",
+  "reason": "Family function"
+}
+
+@leaveId = {{applyLeave.response.body.$.id}}
+
+### Apply with a past start date -> 400
+POST {{baseUrl}}/api/leaves
+Authorization: Bearer {{employeeToken}}
+Content-Type: application/json
+
+{
+  "leaveType": "SICK",
+  "startDate": "2020-01-10",
+  "endDate": "2020-01-11",
+  "reason": "Fever"
+}
+
+### Apply for more days than the balance -> 400
+POST {{baseUrl}}/api/leaves
+Authorization: Bearer {{employeeToken}}
+Content-Type: application/json
+
+{
+  "leaveType": "EARNED",
+  "startDate": "2099-01-01",
+  "endDate": "2099-03-01",
+  "reason": "Long sabbatical"
+}
+
+### My leave history
+GET {{baseUrl}}/api/leaves/my-history
+Authorization: Bearer {{employeeToken}}
+
+### My leave balance
+GET {{baseUrl}}/api/leaves/balance
+Authorization: Bearer {{employeeToken}}
+
+### Employee calling a manager endpoint -> 403
+GET {{baseUrl}}/api/leaves/team
+Authorization: Bearer {{employeeToken}}
+
+### No token -> 401
+GET {{baseUrl}}/api/leaves/balance
+
+############################################################
+# MANAGER
+############################################################
+
+### Team leave requests
+GET {{baseUrl}}/api/leaves/team
+Authorization: Bearer {{managerToken}}
+
+### Approve a request (deducts the days from the employee's balance)
+PUT {{baseUrl}}/api/leaves/{{leaveId}}/approve
+Authorization: Bearer {{managerToken}}
+
+### Reject a request with an optional comment (apply for a new leave first so it is PENDING)
+PUT {{baseUrl}}/api/leaves/{{leaveId}}/reject
+Authorization: Bearer {{managerToken}}
+Content-Type: application/json
+
+{
+  "comment": "Release week - please reschedule"
+}
